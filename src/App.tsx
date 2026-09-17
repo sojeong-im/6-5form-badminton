@@ -4,6 +4,7 @@ import { HomeScreen } from './components/HomeScreen';
 import { ApplyScreen } from './components/ApplyScreen';
 import { PhotosScreen } from './components/PhotosScreen';
 import { SubmissionSuccessModal } from './components/SubmissionSuccessModal';
+import { submitApplication } from './firebase';
 
 const STORAGE_KEY = 'NETWORK_FORM_DRAFT_V2';
 
@@ -95,19 +96,24 @@ export function App() {
     return true;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await submitApplication(formData);
       setIsSubmitted(true);
       try {
         localStorage.removeItem(STORAGE_KEY);
       } catch (e) {
         console.error(e);
       }
-    }, 600);
+    } catch (error) {
+      console.error('제출 중 오류:', error);
+      alert('제출 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
