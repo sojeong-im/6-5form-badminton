@@ -9,7 +9,7 @@ interface PhotoItem {
   id: string;
   src: string;
   title: string;
-  category: '배드민턴' | '탁구' | '친목/뒤풀이';
+  category: '배드민턴' | '탁구' | '야외/족구' | '친목/뒤풀이';
   desc: string;
   tag: string;
 }
@@ -29,6 +29,22 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
     },
     {
       id: '2',
+      src: '/activities/court_rally.jpg',
+      title: '실내 체육관 배드민턴 복식 경기',
+      category: '배드민턴',
+      desc: '팀워크를 맞추며 파이팅 넘치게 즐기는 복식 게임 현장',
+      tag: '🏸 복식 랠리',
+    },
+    {
+      id: '3',
+      src: '/activities/scoreboard.jpg',
+      title: '손에 땀을 쥐는 스코어보드',
+      category: '배드민턴',
+      desc: '4:5 팽팽한 접전! 서로 응원하며 웃음 터지는 명승부',
+      tag: '🔥 긴장감 100%',
+    },
+    {
+      id: '4',
       src: '/activities/badminton_net.jpg',
       title: '스포츠클럽 코트 & 네트 플레이',
       category: '배드민턴',
@@ -36,7 +52,15 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '⚡️ 매치 플레이',
     },
     {
-      id: '3',
+      id: '5',
+      src: '/activities/night_outdoor.jpg',
+      title: '가로등 아래 야간 네트 스포츠',
+      category: '야외/족구',
+      desc: '선선한 밤공기 마시며 즐기는 낭만 가득 야외 매치!',
+      tag: '🌙 야간 스포츠',
+    },
+    {
+      id: '6',
       src: '/activities/table_tennis_match.jpg',
       title: '탁구장 실내 랠리 & 복식 경기',
       category: '탁구',
@@ -44,15 +68,31 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '🏓 핑퐁 세션',
     },
     {
-      id: '4',
+      id: '7',
       src: '/activities/table_tennis_ball.jpg',
       title: '집중과 힐링의 시간',
       category: '탁구',
       desc: '운동에 온전히 집중하며 일상의 스트레스를 시원하게 날려요',
-      tag: '🔥 힐링 스포츠',
+      tag: '🏓 힐링 스포츠',
     },
     {
-      id: '5',
+      id: '8',
+      src: '/activities/pingpong_selfie.jpg',
+      title: '운동 열정 가득 크루 셀피',
+      category: '탁구',
+      desc: '헤어밴드 장착 완료! 언제나 유쾌한 분위기',
+      tag: '✨ 크루 에너지',
+    },
+    {
+      id: '9',
+      src: '/activities/racket_fun.jpg',
+      title: '라켓 뒤로 웃음꽃 피는 현장',
+      category: '친목/뒤풀이',
+      desc: '서먹함 1초 만에 해제! 언제나 편안하고 장난기 넘치는 모임',
+      tag: '🎉 유쾌한 분위기',
+    },
+    {
+      id: '10',
       src: '/activities/dinner.jpg',
       title: '운동 후 꿀맛 같은 고기 회식 & 친목',
       category: '친목/뒤풀이',
@@ -61,7 +101,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
     },
   ];
 
-  const categories = ['전체', '배드민턴', '탁구', '친목/뒤풀이'];
+  const categories = ['전체', '배드민턴', '탁구', '야외/족구', '친목/뒤풀이'];
 
   const filteredPhotos =
     filter === '전체'
@@ -75,13 +115,13 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-lime-400/10 text-lime-400 text-xs font-semibold border border-lime-400/20 mb-1.5">
             <Sparkles className="w-3 h-3" />
-            <span>네트워크 크루 현장 스케치</span>
+            <span>네트워크 크루 현장 스케치 (총 10컷)</span>
           </div>
           <h2 className="text-xl font-black text-white tracking-tight">
             네트워크 활동 사진 갤러리 📸
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            부담 없이 가볍게 즐기고, 뒤풀이까지 유쾌한 네트워크의 실제 분위기를 확인해 보세요!
+            체육관 경기부터 야외 매치, 유쾌한 뒤풀이까지 생생한 분위기를 확인해보세요!
           </p>
         </div>
 
@@ -114,7 +154,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
         <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
           <Trophy className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
           <span className="block text-xs font-bold text-white">다양한 종목</span>
-          <span className="text-[10px] text-slate-400">배드민턴·탁구·족구</span>
+          <span className="text-[10px] text-slate-400">배드민턴·탁구·야외</span>
         </div>
         <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
           <Heart className="w-4 h-4 text-rose-400 mx-auto mb-1" />
@@ -129,7 +169,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
           <div
             key={photo.id}
             onClick={() => setSelectedPhoto(photo)}
-            className="group relative rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900 cursor-pointer transition-all duration-300 hover:border-lime-400/50 hover:shadow-[0_0_25px_rgba(163,230,53,0.12)] hover:-translate-y-1"
+            className="group relative rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900 cursor-pointer transition-all duration-300 hover:border-lime-400/50 hover:shadow-[0_0_25px_rgba(163,230,53,0.15)] hover:-translate-y-1"
           >
             {/* Image */}
             <div className="aspect-[4/3] w-full overflow-hidden bg-slate-950 relative">
@@ -139,15 +179,15 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent opacity-75 group-hover:opacity-60 transition-opacity" />
 
               {/* Tag Badge */}
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-lime-300">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-lime-300">
                 {photo.tag}
               </div>
 
               {/* Zoom hover indicator */}
-              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/10 flex items-center justify-center text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 flex items-center justify-center text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ZoomIn className="w-4 h-4" />
               </div>
             </div>
