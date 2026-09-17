@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { type FormData, INITIAL_DATA } from './types';
 import { Navbar } from './components/Navbar';
+import { HeroBanner } from './components/HeroBanner';
 import { StepProgress } from './components/StepProgress';
 import { Step1BasicInfo } from './components/Step1BasicInfo';
 import { Step2SportsProfile } from './components/Step2SportsProfile';
@@ -8,7 +9,7 @@ import { Step3ScheduleExpectations } from './components/Step3ScheduleExpectation
 import { Step4SelfIntro } from './components/Step4SelfIntro';
 import { ActivityGallery } from './components/ActivityGallery';
 import { SubmissionSuccessModal } from './components/SubmissionSuccessModal';
-import { ChevronLeft, ChevronRight, AlertCircle, Sparkles, Image as ImageIcon, FileText } from 'lucide-react';
+import { ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
 
 const STORAGE_KEY = 'NETWORK_FORM_DRAFT_V1';
 
@@ -48,7 +49,7 @@ export function App() {
   };
 
   const handleReset = () => {
-    if (window.confirm('작성 중인 내용을 모두 초기화하시겠습니까?')) {
+    if (window.confirm('작성 중인 지원서 내용을 초기화하시겠습니까?')) {
       localStorage.removeItem(STORAGE_KEY);
       setFormData(INITIAL_DATA);
       setCurrentStep(1);
@@ -124,7 +125,7 @@ export function App() {
     if (validateCurrentStep(currentStep)) {
       if (currentStep < 4) {
         setCurrentStep((prev) => prev + 1);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 350, behavior: 'smooth' });
       }
     }
   };
@@ -133,7 +134,7 @@ export function App() {
     setValidationError(null);
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 350, behavior: 'smooth' });
     }
   };
 
@@ -141,7 +142,7 @@ export function App() {
     if (step < currentStep) {
       setValidationError(null);
       setCurrentStep(step);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 350, behavior: 'smooth' });
     } else if (step === currentStep + 1) {
       handleNext();
     }
@@ -159,89 +160,40 @@ export function App() {
       } catch (e) {
         console.error(e);
       }
-    }, 800);
+    }, 700);
   };
 
   return (
-    <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col selection:bg-lime-400 selection:text-slate-950 relative overflow-hidden">
-      {/* Background Sport Neon Accents */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-lime-400/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="court-bg min-h-screen text-slate-800 flex flex-col selection:bg-[#74c407] selection:text-[#081d47]">
       {/* Top Navbar */}
-      <Navbar onReset={handleReset} isAutoSaved={isAutoSaved} />
+      <Navbar
+        onReset={handleReset}
+        isAutoSaved={isAutoSaved}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
 
-      {/* Main Container */}
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 pb-24 pt-2">
-        {/* Banner Card */}
-        <div className="mt-4 mb-5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 p-5 shadow-lg relative overflow-hidden">
-          <div className="flex items-center justify-between relative z-10">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-lime-400/10 text-lime-400 text-xs font-semibold border border-lime-400/20 mb-2">
-                <Sparkles className="w-3 h-3" />
-                <span>2026 Season 3 Recruit</span>
-              </div>
-              <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                🏸 네트워크 3기 모집
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                배드민턴 · 탁구 · 족구 & 유쾌한 친목! 실제 현장 사진을 보고 지원해 보세요.
-              </p>
-            </div>
-            <div className="hidden sm:flex text-4xl p-3 bg-slate-800/40 rounded-2xl border border-slate-700/50">
-              🏸
-            </div>
-          </div>
-        </div>
-
-        {/* 🌟 2개의 메인 진입 버튼: 활동 사진 vs 지원하기 */}
-        <div className="grid grid-cols-2 gap-3 mb-6 p-1.5 bg-slate-900/90 border border-slate-800 rounded-2xl">
-          <button
-            type="button"
-            onClick={() => {
-              setActiveTab('photos');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all cursor-pointer ${
-              activeTab === 'photos'
-                ? 'bg-lime-400 text-slate-950 shadow-[0_0_20px_rgba(163,230,53,0.35)] scale-[1.01]'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-            }`}
-          >
-            <ImageIcon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
-            <span>📸 활동 사진</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setActiveTab('apply');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all cursor-pointer ${
-              activeTab === 'apply'
-                ? 'bg-lime-400 text-slate-950 shadow-[0_0_20px_rgba(163,230,53,0.35)] scale-[1.01]'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-            }`}
-          >
-            <FileText className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
-            <span>✍️ 지원하기</span>
-          </button>
-        </div>
+      {/* Main Content Area */}
+      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 pb-24">
+        {/* Poster & Mascot Hero Showcase */}
+        <HeroBanner
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
 
         {/* Tab 1: 활동 사진 갤러리 */}
         {activeTab === 'photos' && (
           <ActivityGallery
             onGoToApply={() => {
               setActiveTab('apply');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 400, behavior: 'smooth' });
             }}
           />
         )}
 
         {/* Tab 2: 지원하기 폼 */}
         {activeTab === 'apply' && (
-          <div>
+          <div className="space-y-4">
             {/* Step Progress Tracker */}
             <StepProgress
               currentStep={currentStep}
@@ -251,14 +203,14 @@ export function App() {
 
             {/* Validation Error Alert */}
             {validationError && (
-              <div className="my-4 p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-300 text-xs sm:text-sm flex items-center gap-2 animate-bounce-subtle">
-                <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+              <div className="p-4 bg-rose-50 border-2 border-rose-200 rounded-2xl text-rose-700 text-xs sm:text-sm font-bold flex items-center gap-2 animate-bounce-subtle">
+                <AlertCircle className="w-5 h-5 shrink-0 text-rose-500" />
                 <span>{validationError}</span>
               </div>
             )}
 
             {/* Step Content */}
-            <div className="mt-4">
+            <div>
               {currentStep === 1 && (
                 <Step1BasicInfo data={formData} onChange={handleChange} />
               )}
@@ -280,25 +232,25 @@ export function App() {
 
             {/* Navigation Buttons (Bottom Bar for Steps 1~3) */}
             {currentStep < 4 && (
-              <div className="mt-8 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
+              <div className="pt-4 flex items-center justify-between gap-3">
                 <button
                   type="button"
                   onClick={handlePrev}
                   disabled={currentStep === 1}
-                  className={`px-4 py-3 rounded-xl border text-sm font-semibold flex items-center gap-2 transition ${
+                  className={`px-5 py-3.5 rounded-2xl border-2 font-bold text-sm flex items-center gap-2 transition cursor-pointer ${
                     currentStep === 1
                       ? 'opacity-0 pointer-events-none'
-                      : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700'
+                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300 shadow-sm'
                   }`}
                 >
-                  <ChevronLeft className="w-4 h-4" />
-                  <span>이전</span>
+                  <ChevronLeft className="w-4 h-4 stroke-[3]" />
+                  <span>이전 단계</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="px-6 py-3 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-sm flex items-center gap-2 shadow-[0_0_20px_rgba(163,230,53,0.25)] hover:shadow-[0_0_25px_rgba(163,230,53,0.4)] active:scale-[0.98] transition-all cursor-pointer"
+                  className="px-8 py-3.5 rounded-2xl bg-[#0d3278] hover:bg-[#081d47] text-white font-black text-sm sm:text-base flex items-center gap-2 shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-all cursor-pointer border-2 border-white/20"
                 >
                   <span>다음 단계로</span>
                   <ChevronRight className="w-4 h-4 stroke-[3]" />

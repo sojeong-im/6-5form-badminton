@@ -175,17 +175,17 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Gallery Header */}
-      <div className="glass-panel p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white p-6 rounded-3xl border-2 border-court-border shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-lime-400/10 text-lime-400 text-xs font-semibold border border-lime-400/20 mb-1.5">
-            <Sparkles className="w-3 h-3" />
-            <span>네트워크 크루 현장 스케치 (총 18컷)</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime-100 text-[#457a03] text-xs font-black mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#74c407]" />
+            <span>네트워크 크루 현장 사진 (총 18컷)</span>
           </div>
-          <h2 className="text-xl font-black text-white tracking-tight">
-            네트워크 활동 사진 갤러리 📸
+          <h2 className="text-xl sm:text-2xl font-black text-[#0d3278] tracking-tight">
+            네트워크 현장 둘러보기 📸
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            체육관 풀코트 세션부터 힙한 탁구장, 야외 레크리에이션, 시원한 쿨다운과 회식까지!
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            체육관 풀코트 세션, 힙한 네온 탁구장, 야외 네트 레크리에이션, 유쾌한 뒤풀이까지!
           </p>
         </div>
 
@@ -196,10 +196,10 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
               key={cat}
               type="button"
               onClick={() => setFilter(cat)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+              className={`px-3.5 py-2 rounded-2xl text-xs font-black border-2 transition-all cursor-pointer ${
                 filter === cat
-                  ? 'bg-lime-400 text-slate-950 border-lime-400 shadow-sm'
-                  : 'bg-slate-900/80 text-slate-400 border-slate-800 hover:text-slate-200'
+                  ? 'bg-[#0d3278] text-white border-[#0d3278] shadow-md'
+                  : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-white'
               }`}
             >
               {cat}
@@ -209,21 +209,21 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       </div>
 
       {/* Highlights Bar */}
-      <div className="grid grid-cols-3 gap-2.5 text-center">
-        <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
-          <Users className="w-4 h-4 text-lime-400 mx-auto mb-1" />
-          <span className="block text-xs font-bold text-white">초보 환영</span>
-          <span className="text-[10px] text-slate-400">처음이어도 안심</span>
+      <div className="grid grid-cols-3 gap-3 text-center">
+        <div className="bg-white border-2 border-court-border p-4 rounded-2xl shadow-sm">
+          <Users className="w-5 h-5 text-[#74c407] mx-auto mb-1.5" />
+          <span className="block text-xs sm:text-sm font-black text-slate-800">초보 대환영</span>
+          <span className="text-[11px] text-slate-500 font-medium">처음이어도 안심!</span>
         </div>
-        <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
-          <Trophy className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-          <span className="block text-xs font-bold text-white">다양한 액티비티</span>
-          <span className="text-[10px] text-slate-400">배드민턴·탁구·야외</span>
+        <div className="bg-white border-2 border-court-border p-4 rounded-2xl shadow-sm">
+          <Trophy className="w-5 h-5 text-emerald-500 mx-auto mb-1.5" />
+          <span className="block text-xs sm:text-sm font-black text-slate-800">다양한 액티비티</span>
+          <span className="text-[11px] text-slate-500 font-medium">배드민턴·탁구·야외</span>
         </div>
-        <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
-          <Heart className="w-4 h-4 text-rose-400 mx-auto mb-1" />
-          <span className="block text-xs font-bold text-white">즐거운 친목</span>
-          <span className="text-[10px] text-slate-400">보드게임 & 자율 뒤풀이</span>
+        <div className="bg-white border-2 border-court-border p-4 rounded-2xl shadow-sm">
+          <Heart className="w-5 h-5 text-rose-500 mx-auto mb-1.5" />
+          <span className="block text-xs sm:text-sm font-black text-slate-800">즐거운 친목</span>
+          <span className="text-[11px] text-slate-500 font-medium">보드게임 & 맛집 회식</span>
         </div>
       </div>
 
@@ -233,35 +233,35 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
           <div
             key={photo.id}
             onClick={() => setSelectedPhoto(photo)}
-            className="group relative rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900 cursor-pointer transition-all duration-300 hover:border-lime-400/50 hover:shadow-[0_0_25px_rgba(163,230,53,0.15)] hover:-translate-y-1"
+            className="group relative rounded-3xl overflow-hidden border-2 border-court-border bg-white cursor-pointer transition-all duration-300 hover:border-[#74c407] hover:shadow-xl hover:shadow-lime-500/15 hover:-translate-y-1"
           >
             {/* Image */}
-            <div className="aspect-[4/3] w-full overflow-hidden bg-slate-950 relative">
+            <div className="aspect-[4/3] w-full overflow-hidden bg-slate-100 relative">
               <img
                 src={photo.src}
                 alt={photo.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent opacity-75 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
               {/* Tag Badge */}
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-lime-300">
+              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 text-xs font-black text-[#0d3278] shadow-sm">
                 {photo.tag}
               </div>
 
               {/* Zoom hover indicator */}
-              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 flex items-center justify-center text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 flex items-center justify-center text-slate-700 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
                 <ZoomIn className="w-4 h-4" />
               </div>
             </div>
 
             {/* Content Bottom */}
-            <div className="p-4 bg-slate-900/90 border-t border-slate-800/80">
-              <h3 className="font-bold text-sm text-white group-hover:text-lime-400 transition-colors">
+            <div className="p-4 bg-white">
+              <h3 className="font-black text-sm sm:text-base text-slate-800 group-hover:text-[#0d3278] transition-colors">
                 {photo.title}
               </h3>
-              <p className="text-xs text-slate-400 mt-1 line-clamp-1">
+              <p className="text-xs text-slate-500 mt-1 line-clamp-1 font-medium">
                 {photo.desc}
               </p>
             </div>
@@ -270,37 +270,40 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       </div>
 
       {/* CTA Box to Apply */}
-      <div className="rounded-2xl bg-gradient-to-r from-lime-950/40 via-slate-900 to-emerald-950/40 border border-lime-400/40 p-6 text-center space-y-3">
-        <h3 className="text-lg font-black text-white">
-          함께 운동하고 추억을 만들어갈 준비가 되셨나요? 🏸
+      <div className="rounded-3xl bg-gradient-to-r from-[#74c407] via-[#88d900] to-[#5ea102] p-7 text-center space-y-3 text-white shadow-xl shadow-lime-600/20 border-2 border-white">
+        <h3 className="text-xl sm:text-2xl font-black tracking-tight text-[#081d47]">
+          “넘기는 건 공, 가까워지는 건 우리.”
         </h3>
-        <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
-          복잡한 절차 없이 1~2분이면 신청이 완료됩니다. 지금 3기에 합류해 보세요!
+        <p className="text-xs sm:text-sm font-bold text-lime-950/90 max-w-md mx-auto leading-relaxed">
+          사진으로 보는 것보다 실제로 함께할 때 100배 더 신나요!<br />
+          네트워크 3기에서 잊지 못할 추억을 만들어보세요.
         </p>
-        <button
-          type="button"
-          onClick={onGoToApply}
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-sm shadow-[0_0_20px_rgba(163,230,53,0.3)] hover:shadow-[0_0_25px_rgba(163,230,53,0.5)] active:scale-[0.98] transition-all cursor-pointer"
-        >
-          <span>네트워크 3기 지원서 작성하기</span>
-          <ArrowRight className="w-4 h-4 stroke-[3]" />
-        </button>
+        <div className="pt-2">
+          <button
+            type="button"
+            onClick={onGoToApply}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#0d3278] hover:bg-[#081d47] text-white font-black text-sm sm:text-base shadow-xl active:scale-[0.98] transition-all cursor-pointer border-2 border-white/40"
+          >
+            <span>네트워크 3기 지원서 작성하기</span>
+            <ArrowRight className="w-4 h-4 stroke-[3]" />
+          </button>
+        </div>
       </div>
 
       {/* Lightbox Modal */}
       {selectedPhoto && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in"
           onClick={() => setSelectedPhoto(null)}
         >
           <div
-            className="relative max-w-3xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl"
+            className="relative max-w-3xl w-full bg-white rounded-3xl overflow-hidden border-2 border-white shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-950/70 text-slate-300 hover:text-white backdrop-blur-md transition"
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 backdrop-blur-md transition cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -313,15 +316,15 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
               />
             </div>
 
-            <div className="p-5 bg-slate-900 flex items-center justify-between">
+            <div className="p-5 bg-white flex items-center justify-between">
               <div>
-                <span className="text-xs text-lime-400 font-semibold block mb-1">
+                <span className="text-xs text-[#74c407] font-black block mb-1">
                   {selectedPhoto.tag}
                 </span>
-                <h4 className="text-base font-bold text-white">
+                <h4 className="text-base sm:text-lg font-black text-[#0d3278]">
                   {selectedPhoto.title}
                 </h4>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   {selectedPhoto.desc}
                 </p>
               </div>
@@ -331,7 +334,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
                   setSelectedPhoto(null);
                   onGoToApply();
                 }}
-                className="shrink-0 px-4 py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition"
+                className="shrink-0 px-4 py-2.5 rounded-xl bg-[#0d3278] hover:bg-[#081d47] text-white font-black text-xs flex items-center gap-1.5 transition cursor-pointer"
               >
                 <span>지원하기</span>
                 <ArrowRight className="w-3.5 h-3.5" />

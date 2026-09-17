@@ -10,10 +10,10 @@ interface Step3Props {
 export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) => {
   const days = ['월', '화', '수', '목', '금', '토', '일'];
   const times = [
-    { id: '14:00~16:00', label: '14:00 ~ 16:00', badge: '오후' },
+    { id: '14:00~16:00', label: '14:00 ~ 16:00', badge: '오후 타임' },
     { id: '16:00~18:00', label: '16:00 ~ 18:00', badge: '늦은 오후' },
-    { id: '18:00~20:00', label: '18:00 ~ 20:00', badge: '저녁 피크' },
-    { id: '20:00 이후', label: '20:00 이후', badge: '야간' },
+    { id: '18:00~20:00', label: '18:00 ~ 20:00', badge: '퇴근/수업 후 피크' },
+    { id: '20:00 이후', label: '20:00 이후', badge: '야간 나이트' },
   ];
 
   const handleToggleDay = (day: string) => {
@@ -45,11 +45,11 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
   };
 
   const expectationsOptions = [
-    { id: '꾸준히 운동하기', emoji: '💪', desc: '주기적인 운동 루틴 만들기' },
-    { id: '새로운 운동 배워보기', emoji: '🏸', desc: '새 종목의 재미 발견' },
-    { id: '다양한 사람들과 친해지기', emoji: '🤝', desc: '다양한 전공/배경의 친구 사귀기' },
-    { id: '학교 밖 새로운 활동 해보기', emoji: '🚀', desc: '일상에서 벗어난 에너지 충전' },
-    { id: '가볍고 즐겁게 운동하기', emoji: '🎉', desc: '부담 없이 힐링하며 땀 흘리기' },
+    { id: '꾸준히 운동하기', emoji: '💪', desc: '주기적인 운동 루틴과 체력 기르기' },
+    { id: '새로운 운동 배워보기', emoji: '🏸', desc: '배드민턴·탁구·족구 재미 발견' },
+    { id: '다양한 사람들과 친해지기', emoji: '🤝', desc: '다양한 사람들과 유쾌한 친목' },
+    { id: '학교 밖 새로운 활동 해보기', emoji: '🚀', desc: '일상에서 벗어나 리프레시하기' },
+    { id: '가볍고 즐겁게 운동하기', emoji: '🎉', desc: '부담 없이 웃으며 땀 흘리기' },
   ];
 
   const handleToggleExpectation = (id: string) => {
@@ -63,40 +63,46 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
   };
 
   return (
-    <div className="space-y-6">
-      <div className="border-b border-slate-800/80 pb-4">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-lime-400/20 text-lime-400 text-sm font-black border border-lime-400/30">
-            3
+    <div className="space-y-5 animate-fade-in">
+      {/* Step Header */}
+      <div className="bg-white p-5 rounded-3xl border-2 border-court-border shadow-sm flex items-center justify-between">
+        <div>
+          <span className="text-xs font-black text-[#74c407] uppercase tracking-wider block mb-1">
+            Step 3 · Schedule & Hope
           </span>
-          일정 & 기대하는 점
-        </h2>
-        <p className="text-sm text-slate-400 mt-1">
-          가장 편안한 요일과 시간대를 알려주시면 모임 편성에 적극 반영합니다.
-        </p>
+          <h2 className="text-xl font-black text-[#0d3278] flex items-center gap-2">
+            참여 일정과 기대하는 점 🗓️
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            가장 편한 요일과 시간대를 알려주시면 크루 모임 편성에 적극 반영합니다.
+          </p>
+        </div>
+        <div className="text-3xl p-2.5 bg-lime-50 rounded-2xl border border-lime-200">
+          ⚽️
+        </div>
       </div>
 
       {/* 8. 요일 및 시간대 */}
-      <div className="glass-panel p-5 rounded-2xl space-y-5">
+      <div className="pop-card p-6 space-y-5">
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-semibold text-slate-200">
-            8. 참여 가능한 요일과 시간대를 모두 선택해주세요. <span className="text-lime-400">*</span>
+          <label className="block text-sm font-bold text-slate-800">
+            8. 참여 가능한 요일과 시간대를 모두 선택해주세요. <span className="text-rose-500">*</span>
           </label>
         </div>
 
-        {/* 요일 선택 영역 */}
+        {/* 요일 선택 */}
         <div className="space-y-2.5">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span className="flex items-center gap-1.5 font-medium text-slate-300">
-              <CalendarDays className="w-3.5 h-3.5 text-lime-400" />
+          <div className="flex items-center justify-between text-xs text-slate-500">
+            <span className="flex items-center gap-1.5 font-bold text-slate-700">
+              <CalendarDays className="w-4 h-4 text-[#74c407]" />
               가능한 요일 (복수 선택)
             </span>
             <button
               type="button"
               onClick={handleSelectAllDays}
-              className="text-xs text-lime-400 hover:text-lime-300 font-semibold underline underline-offset-4"
+              className="text-xs text-[#0d3278] hover:text-blue-700 font-bold underline underline-offset-4 cursor-pointer"
             >
-              {data.availableDays.length === days.length ? '전체 해제' : '모든 요일 체크'}
+              {data.availableDays.length === days.length ? '전체 해제' : '모든 요일 체크 ✓'}
             </button>
           </div>
 
@@ -109,16 +115,16 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
                   key={day}
                   type="button"
                   onClick={() => handleToggleDay(day)}
-                  className={`py-3 rounded-xl border text-sm font-bold flex flex-col items-center justify-center transition-all ${
+                  className={`py-3.5 rounded-2xl border-2 text-sm font-black flex flex-col items-center justify-center transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-lime-400 text-slate-950 border-lime-400 shadow-[0_0_12px_rgba(163,230,53,0.3)] scale-[1.02]'
-                      : `bg-slate-900/80 border-slate-800 ${
-                          isWeekend ? 'text-amber-400 hover:border-amber-400/40' : 'text-slate-300 hover:border-slate-700'
+                      ? 'bg-gradient-to-b from-[#74c407] to-[#88d900] text-[#081d47] border-[#74c407] shadow-md shadow-lime-500/20 scale-[1.03]'
+                      : `bg-slate-50/80 border-slate-200 ${
+                          isWeekend ? 'text-amber-600 hover:border-amber-300' : 'text-slate-700 hover:border-slate-300'
                         }`
                   }`}
                 >
                   <span>{day}</span>
-                  <span className={`text-[10px] mt-0.5 ${isSelected ? 'text-slate-900' : 'text-slate-500'}`}>
+                  <span className={`text-[10px] font-bold mt-0.5 ${isSelected ? 'text-[#081d47]/80' : 'text-slate-400'}`}>
                     {isWeekend ? '주말' : '평일'}
                   </span>
                 </button>
@@ -127,19 +133,19 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
           </div>
         </div>
 
-        {/* 시간대 선택 영역 */}
-        <div className="space-y-2.5 pt-2 border-t border-slate-800/80">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span className="flex items-center gap-1.5 font-medium text-slate-300">
-              <Clock className="w-3.5 h-3.5 text-emerald-400" />
+        {/* 시간대 선택 */}
+        <div className="space-y-2.5 pt-4 border-t border-slate-200">
+          <div className="flex items-center justify-between text-xs text-slate-500">
+            <span className="flex items-center gap-1.5 font-bold text-slate-700">
+              <Clock className="w-4 h-4 text-[#74c407]" />
               선호 시간대 (복수 선택)
             </span>
-            <span className="text-lime-400 font-medium">
+            <span className="text-xs font-black text-[#74c407]">
               {data.availableTimes.length}개 선택됨
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {times.map((time) => {
               const isSelected = data.availableTimes.includes(time.id);
               return (
@@ -147,28 +153,28 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
                   key={time.id}
                   type="button"
                   onClick={() => handleToggleTime(time.id)}
-                  className={`p-3 rounded-xl border text-left transition-all flex items-center justify-between ${
+                  className={`p-3.5 rounded-2xl border-2 text-left transition-all flex items-center justify-between cursor-pointer ${
                     isSelected
-                      ? 'bg-lime-400/15 border-lime-400/90 text-white shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800/90 text-slate-300 hover:border-slate-700'
+                      ? 'bg-lime-50 border-[#74c407] shadow-sm'
+                      : 'bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-white'
                   }`}
                 >
                   <div>
-                    <span className={`block text-sm font-semibold ${isSelected ? 'text-lime-300' : 'text-slate-200'}`}>
+                    <span className={`block text-sm font-bold ${isSelected ? 'text-[#0d3278]' : 'text-slate-800'}`}>
                       {time.label}
                     </span>
-                    <span className="text-[11px] text-slate-400 block mt-0.5">
+                    <span className="text-[11px] font-medium text-slate-500 block mt-0.5">
                       {time.badge}
                     </span>
                   </div>
                   <div
-                    className={`w-5 h-5 rounded-md flex items-center justify-center border shrink-0 transition-colors ${
+                    className={`w-6 h-6 rounded-xl flex items-center justify-center border-2 shrink-0 transition-colors ${
                       isSelected
-                        ? 'bg-lime-400 border-lime-400 text-slate-950'
-                        : 'border-slate-700 bg-slate-800/40 text-transparent'
+                        ? 'bg-[#0d3278] border-[#0d3278] text-white'
+                        : 'border-slate-300 bg-white text-transparent'
                     }`}
                   >
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    <Check className="w-4 h-4 stroke-[3]" />
                   </div>
                 </button>
               );
@@ -178,15 +184,13 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
       </div>
 
       {/* 9. 가장 기대하는 것 */}
-      <div className="glass-panel p-5 rounded-2xl space-y-3">
-        <div className="flex items-center justify-between">
-          <label className="block text-sm font-semibold text-slate-200 flex items-center gap-1.5">
-            <Heart className="w-4 h-4 text-rose-400" />
-            9. 네트워크에서 가장 기대하는 것은 무엇인가요? (복수 선택 가능) <span className="text-lime-400">*</span>
-          </label>
-        </div>
+      <div className="pop-card p-6 space-y-4">
+        <label className="block text-sm font-bold text-slate-800 flex items-center gap-1.5">
+          <Heart className="w-4 h-4 text-rose-500" />
+          9. 네트워크에서 가장 기대하는 것은 무엇인가요? (복수 선택 가능) <span className="text-rose-500">*</span>
+        </label>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {expectationsOptions.map((opt) => {
             const isSelected = data.expectations.includes(opt.id);
             return (
@@ -194,27 +198,27 @@ export const Step3ScheduleExpectations: FC<Step3Props> = ({ data, onChange }) =>
                 key={opt.id}
                 type="button"
                 onClick={() => handleToggleExpectation(opt.id)}
-                className={`p-3.5 rounded-xl border text-left transition-all flex items-start gap-3 ${
+                className={`p-4 rounded-2xl border-2 text-left transition-all flex items-start gap-3 cursor-pointer ${
                   isSelected
-                    ? 'bg-lime-400/10 border-lime-400/80 text-white shadow-sm'
-                    : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                    ? 'bg-lime-50 border-[#74c407] shadow-sm'
+                    : 'bg-slate-50/70 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-white'
                 }`}
               >
-                <span className="text-xl shrink-0 mt-0.5">{opt.emoji}</span>
+                <span className="text-2xl shrink-0 mt-0.5">{opt.emoji}</span>
                 <div className="flex-1">
-                  <span className={`block text-sm font-semibold ${isSelected ? 'text-lime-300' : 'text-slate-200'}`}>
+                  <span className={`block text-sm font-bold ${isSelected ? 'text-[#0d3278]' : 'text-slate-800'}`}>
                     {opt.id}
                   </span>
-                  <span className="block text-xs text-slate-400 mt-0.5">
+                  <span className="block text-xs font-medium text-slate-500 mt-0.5 leading-snug">
                     {opt.desc}
                   </span>
                 </div>
                 <div
-                  className={`w-4 h-4 rounded-md flex items-center justify-center border shrink-0 mt-0.5 ${
-                    isSelected ? 'bg-lime-400 border-lime-400 text-slate-950' : 'border-slate-700'
+                  className={`w-5 h-5 rounded-lg flex items-center justify-center border-2 shrink-0 mt-0.5 ${
+                    isSelected ? 'bg-[#0d3278] border-[#0d3278] text-white' : 'border-slate-300 bg-white'
                   }`}
                 >
-                  {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                  {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                 </div>
               </button>
             );

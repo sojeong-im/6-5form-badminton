@@ -7,21 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
+        court: {
+          light: '#f6fcee',
+          border: '#e2f2cc',
+          green: '#74c407',
+          lime: '#88d900',
+          darkgreen: '#457a03',
+        },
         brand: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-          accent: '#10b981',
-          volt: '#ccff00',
-          electric: '#2563eb'
+          blue: '#0d3278',
+          navy: '#081d47',
+          orange: '#ff5722',
+          yellow: '#ffcc00'
         }
+      },
+      fontFamily: {
+        sans: ['"Pretendard Variable"', 'sans-serif'],
       }
     },
   },
