@@ -29,14 +29,22 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
     },
     {
       id: '2',
+      src: '/activities/badminton_match_05.jpg',
+      title: '05번 코트 배드민턴 복식 게임',
+      category: '배드민턴',
+      desc: '서로 호흡을 맞추며 즐기는 박진감 넘치는 복식 매치 현장',
+      tag: '🏸 코트 플레이',
+    },
+    {
+      id: '3',
       src: '/activities/court_rally.jpg',
-      title: '실내 체육관 배드민턴 복식 경기',
+      title: '실내 체육관 배드민턴 랠리',
       category: '배드민턴',
       desc: '팀워크를 맞추며 파이팅 넘치게 즐기는 복식 게임 현장',
       tag: '🏸 복식 랠리',
     },
     {
-      id: '3',
+      id: '4',
       src: '/activities/scoreboard.jpg',
       title: '손에 땀을 쥐는 스코어보드',
       category: '배드민턴',
@@ -44,7 +52,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '🔥 긴장감 100%',
     },
     {
-      id: '4',
+      id: '5',
       src: '/activities/badminton_net.jpg',
       title: '스포츠클럽 코트 & 네트 플레이',
       category: '배드민턴',
@@ -52,15 +60,15 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '⚡️ 매치 플레이',
     },
     {
-      id: '5',
-      src: '/activities/night_outdoor.jpg',
-      title: '가로등 아래 야간 네트 스포츠',
-      category: '야외/족구',
-      desc: '선선한 밤공기 마시며 즐기는 낭만 가득 야외 매치!',
-      tag: '🌙 야간 스포츠',
+      id: '6',
+      src: '/activities/pingpong_club.jpg',
+      title: '힙한 네온 탁구장 단체전',
+      category: '탁구',
+      desc: '감각적인 조명 아래 함께 응원하고 환호하는 뜨거운 핑퐁 타임',
+      tag: '🏓 핑퐁 나이트',
     },
     {
-      id: '6',
+      id: '7',
       src: '/activities/table_tennis_match.jpg',
       title: '탁구장 실내 랠리 & 복식 경기',
       category: '탁구',
@@ -68,7 +76,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '🏓 핑퐁 세션',
     },
     {
-      id: '7',
+      id: '8',
       src: '/activities/table_tennis_ball.jpg',
       title: '집중과 힐링의 시간',
       category: '탁구',
@@ -76,15 +84,47 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '🏓 힐링 스포츠',
     },
     {
-      id: '8',
+      id: '9',
       src: '/activities/pingpong_selfie.jpg',
       title: '운동 열정 가득 크루 셀피',
       category: '탁구',
-      desc: '헤어밴드 장착 완료! 언제나 유쾌한 분위기',
+      desc: '헤어밴드 장착 완료! 언제나 유쾌하고 에너지 넘치는 분위기',
       tag: '✨ 크루 에너지',
     },
     {
-      id: '9',
+      id: '10',
+      src: '/activities/outdoor_game.jpg',
+      title: '야외 인조잔디 네트 레크리에이션',
+      category: '야외/족구',
+      desc: '푸른 하늘 아래서 풍선과 공으로 즐기는 꿀잼 단체 게임!',
+      tag: '☀️ 야외 액티비티',
+    },
+    {
+      id: '11',
+      src: '/activities/night_outdoor.jpg',
+      title: '가로등 아래 야간 네트 스포츠',
+      category: '야외/족구',
+      desc: '선선한 밤공기 마시며 즐기는 낭만 가득 야외 매치!',
+      tag: '🌙 야간 스포츠',
+    },
+    {
+      id: '12',
+      src: '/activities/crew_group.jpg',
+      title: '활기찬 네트워크 단체 기념사진',
+      category: '친목/뒤풀이',
+      desc: '처음 만났어도 금방 절친이 되는 따뜻하고 유쾌한 동아리',
+      tag: '📸 단체 사진',
+    },
+    {
+      id: '13',
+      src: '/activities/boardgame_fun.jpg',
+      title: '테이블 미니게임 & 보드게임 친목',
+      category: '친목/뒤풀이',
+      desc: '운동 후 삼삼오오 모여 웃고 떠드는 재미있는 게임 타임',
+      tag: '🎲 보드게임 친목',
+    },
+    {
+      id: '14',
       src: '/activities/racket_fun.jpg',
       title: '라켓 뒤로 웃음꽃 피는 현장',
       category: '친목/뒤풀이',
@@ -92,7 +132,7 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
       tag: '🎉 유쾌한 분위기',
     },
     {
-      id: '10',
+      id: '15',
       src: '/activities/dinner.jpg',
       title: '운동 후 꿀맛 같은 고기 회식 & 친목',
       category: '친목/뒤풀이',
@@ -115,13 +155,13 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-lime-400/10 text-lime-400 text-xs font-semibold border border-lime-400/20 mb-1.5">
             <Sparkles className="w-3 h-3" />
-            <span>네트워크 크루 현장 스케치 (총 10컷)</span>
+            <span>네트워크 크루 현장 스케치 (총 15컷)</span>
           </div>
           <h2 className="text-xl font-black text-white tracking-tight">
             네트워크 활동 사진 갤러리 📸
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            체육관 경기부터 야외 매치, 유쾌한 뒤풀이까지 생생한 분위기를 확인해보세요!
+            체육관 경기, 야외 네트 레크리에이션, 힙한 탁구장, 보드게임과 뒤풀이까지!
           </p>
         </div>
 
@@ -153,13 +193,13 @@ export const ActivityGallery: FC<ActivityGalleryProps> = ({ onGoToApply }) => {
         </div>
         <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
           <Trophy className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-          <span className="block text-xs font-bold text-white">다양한 종목</span>
+          <span className="block text-xs font-bold text-white">다양한 액티비티</span>
           <span className="text-[10px] text-slate-400">배드민턴·탁구·야외</span>
         </div>
         <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl">
           <Heart className="w-4 h-4 text-rose-400 mx-auto mb-1" />
           <span className="block text-xs font-bold text-white">즐거운 친목</span>
-          <span className="text-[10px] text-slate-400">자율 참석 뒤풀이</span>
+          <span className="text-[10px] text-slate-400">보드게임 & 자율 뒤풀이</span>
         </div>
       </div>
 
