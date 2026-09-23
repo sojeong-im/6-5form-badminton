@@ -1,6 +1,18 @@
 import { type FC, type ChangeEvent } from 'react';
 import type { FormData } from '../types';
-import { ArrowLeft, Check } from 'lucide-react';
+import {
+  ArrowLeft,
+  Check,
+  User,
+  GraduationCap,
+  MapPin,
+  Phone,
+  Sparkles,
+  Calendar,
+  Heart,
+  MessageSquare,
+  Activity,
+} from 'lucide-react';
 
 interface ApplyScreenProps {
   data: FormData;
@@ -32,15 +44,63 @@ export const ApplyScreen: FC<ApplyScreenProps> = ({
   };
 
   const days = ['월', '화', '수', '목', '금', '토', '일'];
-  const times = ['14:00~16:00', '16:00~18:00', '18:00~20:00', '20:00 이후'];
-  const sportsOptions = ['배드민턴 🏸', '탁구 🏓', '족구 ⚽️', '종목 상관없이 다양하게 해보고 싶어요'];
-  const frequencyOptions = ['거의 하지 않는 편', '가끔 하는 편', '주 1~2회 정도', '주 3회 이상'];
-  const expectationsOptions = [
-    '꾸준히 운동하기',
-    '새로운 운동 배워보기',
-    '다양한 사람들과 친해지기',
-    '학교 밖 새로운 활동 해보기',
-    '가볍고 즐겁게 운동하기',
+
+  const times = [
+    { label: '14:00 ~ 16:00', icon: '☀️' },
+    { label: '16:00 ~ 18:00', icon: '⛅' },
+    { label: '18:00 ~ 20:00', icon: '🌆' },
+    { label: '20:00 이후', icon: '🌙' },
+  ];
+
+  const sportsList = [
+    {
+      id: '배드민턴 🏸',
+      name: '배드민턴',
+      emoji: '🏸',
+      bgColor: 'bg-emerald-50 hover:bg-emerald-100/80',
+      activeBorder: 'border-emerald-500 ring-2 ring-emerald-400/30 bg-emerald-50/90',
+      tagColor: 'bg-emerald-500 text-white',
+    },
+    {
+      id: '탁구 🏓',
+      name: '탁구',
+      emoji: '🏓',
+      bgColor: 'bg-rose-50 hover:bg-rose-100/80',
+      activeBorder: 'border-rose-500 ring-2 ring-rose-400/30 bg-rose-50/90',
+      tagColor: 'bg-rose-500 text-white',
+    },
+    {
+      id: '족구 ⚽️',
+      name: '족구',
+      emoji: '⚽',
+      bgColor: 'bg-sky-50 hover:bg-sky-100/80',
+      activeBorder: 'border-sky-500 ring-2 ring-sky-400/30 bg-sky-50/90',
+      tagColor: 'bg-sky-500 text-white',
+    },
+    {
+      id: '종목 상관없이 다양하게 해보고 싶어요',
+      name: '모든 종목 다양하게',
+      emoji: '✨',
+      bgColor: 'bg-amber-50 hover:bg-amber-100/80',
+      activeBorder: 'border-amber-500 ring-2 ring-amber-400/30 bg-amber-50/90',
+      tagColor: 'bg-amber-500 text-white',
+    },
+  ];
+
+  const frequencyOptions = [
+    { label: '주 1~2회', icon: '🌿' },
+    { label: '주 3회 이상', icon: '🔥' },
+    { label: '가끔 하는 편', icon: '🌱' },
+    { label: '거의 하지 않음', icon: '💤' },
+  ];
+
+  const expectationsList = [
+    { label: '꾸준한 운동 습관', emoji: '💪' },
+    { label: '다양한 친구 만들기', emoji: '🤝' },
+    { label: '새로운 운동 배우기', emoji: '🎯' },
+    { label: '스트레스 해소', emoji: '⚡' },
+    { label: '즐거운 뒤풀이 & 친목', emoji: '🎉' },
+    { label: '새로운 경험하기', emoji: '🚀' },
   ];
 
   const handleToggleSport = (val: string) => {
@@ -49,7 +109,7 @@ export const ApplyScreen: FC<ApplyScreenProps> = ({
       if (list.includes(val)) {
         list = list.filter((s) => s !== val);
       } else {
-        list = [...sportsOptions];
+        list = sportsList.map((s) => s.id);
       }
     } else {
       if (list.includes(val)) {
@@ -100,299 +160,221 @@ export const ApplyScreen: FC<ApplyScreenProps> = ({
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto py-6 px-4">
-      {/* Top Header */}
-      <div className="mb-6 flex items-center justify-between border-b border-slate-200 pb-4">
-        <button
-          type="button"
-          onClick={onBackToHome}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 transition"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>처음으로</span>
-        </button>
-        <span className="text-xs font-semibold text-slate-400">네트워크 3기</span>
-      </div>
-
-      {/* Title */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
-          네트워크 3기 지원서
-        </h1>
-        <p className="text-sm text-slate-500 mt-1.5">
-          아래 질문에 답변을 작성해 주세요.
-        </p>
-      </div>
-
-      {/* Validation Error Alert */}
-      {validationError && (
-        <div className="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-sm font-medium">
-          {validationError}
+    <div className="min-h-screen bg-gradient-to-b from-sky-50/80 via-[#f8fafc] to-white py-6 px-4">
+      <div className="w-full max-w-lg mx-auto">
+        {/* Top Header */}
+        <div className="mb-5 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={onBackToHome}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-xs cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>돌아가기</span>
+          </button>
+          <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-100/80 text-sky-800 text-[11px] font-bold border border-sky-200/60">
+            <Sparkles className="w-3 h-3 text-sky-600" />
+            <span>네트워크 3기</span>
+          </div>
         </div>
-      )}
 
-      {/* Form Fields */}
-      <div className="space-y-8 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
-        {/* 1. 이름 / 성별 / 나이 */}
-        <div className="space-y-2">
-          <label className="block text-sm font-semibold text-slate-900">
-            1. 이름 / 성별 / 나이를 적어주세요. <span className="text-rose-500">*</span>
-          </label>
-          <p className="text-xs text-slate-400">예) 김네트 / 남 / 23세</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-            <input
-              type="text"
-              value={data.name}
-              onChange={(e) => onChange('name', e.target.value)}
-              placeholder="이름"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition"
-            />
-            <div className="grid grid-cols-2 gap-1 bg-slate-100 p-1 border border-slate-200 rounded-xl">
-              {(['남', '여'] as const).map((gender) => (
+        {/* Title Header Card */}
+        <div className="mb-5 p-5 rounded-2xl bg-white border border-sky-100 shadow-sm flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+              <span>동아리 지원서</span>
+              <span className="text-lg">🏸</span>
+            </h1>
+            <p className="text-xs text-slate-400 mt-1">
+              각 항목을 가볍게 체크해 주세요!
+            </p>
+          </div>
+          <div className="flex -space-x-1 text-base p-2 bg-sky-50 rounded-xl border border-sky-100">
+            <span>🏸</span>
+            <span>🏓</span>
+            <span>⚽</span>
+          </div>
+        </div>
+
+        {/* Validation Error Alert */}
+        {validationError && (
+          <div className="mb-5 p-3.5 bg-rose-50 border border-rose-200 rounded-2xl text-rose-700 text-xs font-semibold flex items-center gap-2">
+            <span className="text-rose-500 text-sm font-bold">!</span>
+            <span>{validationError}</span>
+          </div>
+        )}
+
+        {/* Form Container */}
+        <div className="space-y-4">
+          {/* Section 1: 기본 정보 */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-4">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-800 border-b border-slate-100 pb-2.5">
+              <div className="w-5 h-5 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center">
+                <User className="w-3 h-3" />
+              </div>
+              <span>기본 정보</span>
+              <span className="text-rose-500">*</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input
+                type="text"
+                value={data.name}
+                onChange={(e) => onChange('name', e.target.value)}
+                placeholder="이름"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+              />
+
+              {/* Gender Pills */}
+              <div className="grid grid-cols-2 gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200/60">
+                {(['남', '여'] as const).map((gender) => (
+                  <button
+                    key={gender}
+                    type="button"
+                    onClick={() => onChange('gender', gender)}
+                    className={`rounded-lg py-1.5 text-xs font-bold transition cursor-pointer ${
+                      data.gender === gender
+                        ? 'bg-sky-600 text-white shadow-xs'
+                        : 'text-slate-500 hover:text-slate-900'
+                    }`}
+                  >
+                    {gender}
+                  </button>
+                ))}
+              </div>
+
+              <input
+                type="number"
+                value={data.age}
+                onChange={(e) => onChange('age', e.target.value)}
+                placeholder="나이 (세)"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+              />
+            </div>
+          </div>
+
+          {/* Section 2: 학교 / 전공 / 학적 */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3.5">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-800 border-b border-slate-100 pb-2.5">
+              <div className="w-5 h-5 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                <GraduationCap className="w-3.5 h-3.5" />
+              </div>
+              <span>대학 및 학적</span>
+              <span className="text-rose-500">*</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <input
+                type="text"
+                value={data.university}
+                onChange={(e) => onChange('university', e.target.value)}
+                placeholder="대학교명"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+              />
+              <input
+                type="text"
+                value={data.major}
+                onChange={(e) => onChange('major', e.target.value)}
+                placeholder="학과/전공"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+              />
+            </div>
+
+            {/* Status Chips */}
+            <div className="grid grid-cols-4 gap-1.5">
+              {(['재학', '휴학', '졸업', '기타'] as const).map((status) => (
                 <button
-                  key={gender}
+                  key={status}
                   type="button"
-                  onClick={() => onChange('gender', gender)}
-                  className={`rounded-lg text-xs font-semibold transition ${
-                    data.gender === gender
-                      ? 'bg-white text-slate-900 shadow-sm'
-                      : 'text-slate-500 hover:text-slate-800'
+                  onClick={() => onChange('academicStatus', status)}
+                  className={`py-2 rounded-xl text-xs font-semibold border transition cursor-pointer ${
+                    data.academicStatus === status
+                      ? 'bg-[#081d47] border-[#081d47] text-white shadow-xs'
+                      : 'bg-slate-50/80 border-slate-200/80 text-slate-600 hover:border-slate-300'
                   }`}
                 >
-                  {gender}
+                  {status}
                 </button>
               ))}
             </div>
-            <input
-              type="number"
-              value={data.age}
-              onChange={(e) => onChange('age', e.target.value)}
-              placeholder="나이"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition"
-            />
           </div>
-        </div>
 
-        {/* 2. 학교 / 전공 / 학적 상태 */}
-        <div className="space-y-2 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            2. 학교 / 전공 / 학적 상태를 알려주세요. <span className="text-rose-500">*</span>
-          </label>
-          <p className="text-xs text-slate-500">
-            예) OO대학교 / 경영학과 / 재학 <br />
-            <span className="text-slate-400">재학·휴학·졸업 모두 가능합니다!</span>
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-            <input
-              type="text"
-              value={data.university}
-              onChange={(e) => onChange('university', e.target.value)}
-              placeholder="학교 (예: OO대학교)"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition"
-            />
-            <input
-              type="text"
-              value={data.major}
-              onChange={(e) => onChange('major', e.target.value)}
-              placeholder="전공 (예: 경영학과)"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition"
-            />
-          </div>
-          <div className="flex flex-wrap gap-2 pt-1">
-            {(['재학', '휴학', '졸업', '기타'] as const).map((status) => (
-              <button
-                key={status}
-                type="button"
-                onClick={() => onChange('academicStatus', status)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
-                  data.academicStatus === status
-                    ? 'bg-slate-900 border-slate-900 text-white'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300'
-                }`}
-              >
-                {status}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 3. 현재 거주 지역 */}
-        <div className="space-y-2 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            3. 현재 거주 지역을 알려주세요. <span className="text-rose-500">*</span>
-          </label>
-          <p className="text-xs text-slate-400">
-            예) 서울 관악구 / 경기 구리시 (상세 주소는 작성하지 않아도 됩니다.)
-          </p>
-          <input
-            type="text"
-            value={data.residence}
-            onChange={(e) => onChange('residence', e.target.value)}
-            placeholder="거주 지역"
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition"
-          />
-        </div>
-
-        {/* 4. 연락 가능한 전화번호 */}
-        <div className="space-y-2 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            4. 연락 가능한 전화번호를 적어주세요. <span className="text-rose-500">*</span>
-          </label>
-          <p className="text-xs text-slate-400">예) 010-1234-5678</p>
-          <input
-            type="tel"
-            value={data.phone}
-            onChange={handlePhoneChange}
-            placeholder="010-1234-5678"
-            maxLength={13}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white font-mono transition"
-          />
-        </div>
-
-        {/* 5. 관심 있는 종목 */}
-        <div className="space-y-2.5 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            5. 관심 있는 종목을 선택해주세요. (복수 선택) <span className="text-rose-500">*</span>
-          </label>
-          <div className="space-y-2 pt-1">
-            {sportsOptions.map((opt) => {
-              const isChecked = data.sports.includes(opt);
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  onClick={() => handleToggleSport(opt)}
-                  className={`w-full p-3 rounded-xl border text-left text-sm font-medium flex items-center justify-between transition ${
-                    isChecked
-                      ? 'bg-slate-900 border-slate-900 text-white'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  <span>{opt}</span>
-                  <div
-                    className={`w-5 h-5 rounded border flex items-center justify-center ${
-                      isChecked ? 'border-white bg-white/20 text-white' : 'border-slate-300'
-                    }`}
-                  >
-                    {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 6. 평소 운동 빈도 */}
-        <div className="space-y-2.5 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            6. 평소 운동은 어느 정도 즐기시나요? <span className="text-rose-500">*</span>
-          </label>
-          <div className="space-y-2 pt-1">
-            {frequencyOptions.map((opt) => {
-              const isChecked = data.exerciseFrequency === opt;
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  onClick={() => onChange('exerciseFrequency', opt)}
-                  className={`w-full p-3 rounded-xl border text-left text-sm font-medium flex items-center justify-between transition ${
-                    isChecked
-                      ? 'bg-slate-900 border-slate-900 text-white'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  <span>{opt}</span>
-                  <div
-                    className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      isChecked ? 'border-white bg-white' : 'border-slate-300'
-                    }`}
-                  >
-                    {isChecked && <div className="w-1.5 h-1.5 rounded-full bg-slate-900" />}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 7. 각 종목의 경험 */}
-        <div className="space-y-2 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            7. 각 종목의 경험을 간단히 알려주세요.
-          </label>
-          <p className="text-xs text-slate-400">
-            예) 배드민턴 — 가끔 / 탁구 — 처음 / 족구 — 해본 적 있음 <br />
-            처음이어도 전혀 상관없어요!
-          </p>
-          <input
-            type="text"
-            value={data.experienceCustomNotes}
-            onChange={(e) => onChange('experienceCustomNotes', e.target.value)}
-            placeholder="예: 배드민턴 — 가끔, 탁구 — 처음, 족구 — 해본 적 있음"
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition"
-          />
-        </div>
-
-        {/* 8. 참여 가능한 요일과 시간대 */}
-        <div className="space-y-3 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            8. 참여 가능한 요일과 시간대를 모두 선택해주세요. (복수 선택) <span className="text-rose-500">*</span>
-          </label>
-
-          {/* 요일 */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs text-slate-500">
-              <span>요일</span>
-              <button
-                type="button"
-                onClick={handleSelectAllDays}
-                className="text-xs text-slate-700 underline underline-offset-2 font-medium"
-              >
-                {data.availableDays.length === days.length ? '전체 해제' : '모든 요일 체크'}
-              </button>
+          {/* Section 3: 거주지 및 연락처 */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-800 border-b border-slate-100 pb-2.5">
+              <div className="w-5 h-5 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                <MapPin className="w-3 h-3" />
+              </div>
+              <span>거주지 & 연락처</span>
+              <span className="text-rose-500">*</span>
             </div>
-            <div className="grid grid-cols-7 gap-1.5">
-              {days.map((d) => {
-                const isSelected = data.availableDays.includes(d);
-                return (
-                  <button
-                    key={d}
-                    type="button"
-                    onClick={() => handleToggleDay(d)}
-                    className={`py-2.5 rounded-xl border text-xs font-semibold transition ${
-                      isSelected
-                        ? 'bg-slate-900 border-slate-900 text-white'
-                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                    }`}
-                  >
-                    {d}
-                  </button>
-                );
-              })}
+
+            <div className="space-y-2">
+              <div className="relative">
+                <MapPin className="w-3.5 h-3.5 text-slate-400 absolute left-3.5 top-3" />
+                <input
+                  type="text"
+                  value={data.residence}
+                  onChange={(e) => onChange('residence', e.target.value)}
+                  placeholder="거주 지역 (예: 서울 관악구, 경기 성남시)"
+                  className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50/80 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+                />
+              </div>
+
+              <div className="relative">
+                <Phone className="w-3.5 h-3.5 text-slate-400 absolute left-3.5 top-3" />
+                <input
+                  type="tel"
+                  value={data.phone}
+                  onChange={handlePhoneChange}
+                  placeholder="전화번호 (010-0000-0000)"
+                  maxLength={13}
+                  className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50/80 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 font-mono focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+                />
+              </div>
             </div>
           </div>
 
-          {/* 시간대 */}
-          <div className="space-y-2 pt-2">
-            <span className="text-xs text-slate-500 block">시간대</span>
-            <div className="space-y-1.5">
-              {times.map((t) => {
-                const isSelected = data.availableTimes.includes(t);
+          {/* Section 4: 희망 종목 (포스터 디자인 매칭 비주얼 카드) */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div className="w-5 h-5 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                  <Activity className="w-3.5 h-3.5" />
+                </div>
+                <span>희망 종목</span>
+                <span className="text-rose-500">*</span>
+              </div>
+              <span className="text-[11px] text-slate-400 font-medium">복수 선택</span>
+            </div>
+
+            {/* Poster style sport cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {sportsList.map((sport) => {
+                const isSelected = data.sports.includes(sport.id);
                 return (
                   <button
-                    key={t}
+                    key={sport.id}
                     type="button"
-                    onClick={() => handleToggleTime(t)}
-                    className={`w-full p-2.5 rounded-xl border text-left text-xs font-medium flex items-center justify-between transition ${
+                    onClick={() => handleToggleSport(sport.id)}
+                    className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                       isSelected
-                        ? 'bg-slate-900 border-slate-900 text-white'
-                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
+                        ? sport.activeBorder
+                        : `border-slate-200/80 ${sport.bgColor}`
                     }`}
                   >
-                    <span>{t}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{sport.emoji}</span>
+                      <span className="text-xs font-bold text-slate-800">
+                        {sport.name}
+                      </span>
+                    </div>
+
                     <div
-                      className={`w-4 h-4 rounded border flex items-center justify-center ${
-                        isSelected ? 'border-white bg-white/20 text-white' : 'border-slate-300'
+                      className={`w-5 h-5 rounded-full flex items-center justify-center transition ${
+                        isSelected
+                          ? `${sport.tagColor} shadow-xs`
+                          : 'border border-slate-300 bg-white'
                       }`}
                     >
                       {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
@@ -402,68 +384,183 @@ export const ApplyScreen: FC<ApplyScreenProps> = ({
               })}
             </div>
           </div>
-        </div>
 
-        {/* 9. 가장 기대하는 것 */}
-        <div className="space-y-2.5 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            9. 네트워크에서 가장 기대하는 것은 무엇인가요? (복수 선택 가능) <span className="text-rose-500">*</span>
-          </label>
-          <div className="space-y-2 pt-1">
-            {expectationsOptions.map((exp) => {
-              const isChecked = data.expectations.includes(exp);
-              return (
-                <button
-                  key={exp}
-                  type="button"
-                  onClick={() => handleToggleExpectation(exp)}
-                  className={`w-full p-3 rounded-xl border text-left text-sm font-medium flex items-center justify-between transition ${
-                    isChecked
-                      ? 'bg-slate-900 border-slate-900 text-white'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  <span>{exp}</span>
-                  <div
-                    className={`w-4 h-4 rounded border flex items-center justify-center ${
-                      isChecked ? 'border-white bg-white/20 text-white' : 'border-slate-300'
+          {/* Section 5: 운동 빈도 & 종목 경험 */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3.5">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-800 border-b border-slate-100 pb-2.5">
+              <div className="w-5 h-5 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                <Activity className="w-3.5 h-3.5" />
+              </div>
+              <span>운동 성향 & 경험</span>
+              <span className="text-rose-500">*</span>
+            </div>
+
+            {/* Frequency chips */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {frequencyOptions.map((opt) => {
+                const isSelected = data.exerciseFrequency === opt.label;
+                return (
+                  <button
+                    key={opt.label}
+                    type="button"
+                    onClick={() => onChange('exerciseFrequency', opt.label)}
+                    className={`py-2.5 px-3 rounded-xl border text-center transition cursor-pointer flex flex-col items-center gap-1 ${
+                      isSelected
+                        ? 'bg-sky-600 border-sky-600 text-white shadow-xs'
+                        : 'bg-slate-50/80 border-slate-200/80 text-slate-700 hover:border-slate-300'
                     }`}
                   >
-                    {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                  </div>
-                </button>
-              );
-            })}
+                    <span className="text-base">{opt.icon}</span>
+                    <span className="text-[11px] font-bold">{opt.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Simple experience input */}
+            <input
+              type="text"
+              value={data.experienceCustomNotes}
+              onChange={(e) => onChange('experienceCustomNotes', e.target.value)}
+              placeholder="종목별 경험 (예: 배드민턴 조금, 탁구 처음, 족구 가끔)"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition"
+            />
           </div>
-        </div>
 
-        {/* 10. 간단 자기소개 */}
-        <div className="space-y-2 pt-4 border-t border-slate-100">
-          <label className="block text-sm font-semibold text-slate-900">
-            10. 마지막으로 간단하게 본인을 소개해주세요 :) <span className="text-rose-500">*</span>
-          </label>
-          <p className="text-xs text-slate-400">
-            성격, 취미, 운동 스타일 등 편하게 2~3줄이면 충분합니다!
-          </p>
-          <textarea
-            rows={4}
-            value={data.introduction}
-            onChange={(e) => onChange('introduction', e.target.value)}
-            placeholder="편하게 작성해 주세요."
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-800 focus:bg-white transition leading-relaxed"
-          />
-        </div>
+          {/* Section 6: 가능 요일 & 시간대 */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3.5">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div className="w-5 h-5 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center">
+                  <Calendar className="w-3.5 h-3.5" />
+                </div>
+                <span>가능한 일정</span>
+                <span className="text-rose-500">*</span>
+              </div>
+              <button
+                type="button"
+                onClick={handleSelectAllDays}
+                className="text-[11px] font-semibold text-sky-600 hover:text-sky-800 cursor-pointer"
+              >
+                {data.availableDays.length === days.length ? '선택 해제' : '모든 요일 선택'}
+              </button>
+            </div>
 
-        {/* Submit Button */}
-        <div className="pt-4 border-t border-slate-100">
-          <button
-            type="button"
-            onClick={onSubmit}
-            disabled={isSubmitting}
-            className="w-full py-4 rounded-xl bg-[#0d3278] hover:bg-[#081d47] text-white font-bold text-base transition-all disabled:opacity-50 cursor-pointer shadow-md"
-          >
-            {isSubmitting ? '제출 중...' : '제출하기'}
-          </button>
+            {/* Days row */}
+            <div className="grid grid-cols-7 gap-1.5">
+              {days.map((d) => {
+                const isSelected = data.availableDays.includes(d);
+                const isWeekend = d === '토' || d === '일';
+                return (
+                  <button
+                    key={d}
+                    type="button"
+                    onClick={() => handleToggleDay(d)}
+                    className={`py-2.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#081d47] border-[#081d47] text-white shadow-xs'
+                        : isWeekend
+                        ? 'bg-rose-50/50 border-rose-200/60 text-rose-600 hover:bg-rose-50'
+                        : 'bg-slate-50/80 border-slate-200/80 text-slate-700 hover:border-slate-300'
+                    }`}
+                  >
+                    {d}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Time slots */}
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              {times.map((t) => {
+                const isSelected = data.availableTimes.includes(t.label);
+                return (
+                  <button
+                    key={t.label}
+                    type="button"
+                    onClick={() => handleToggleTime(t.label)}
+                    className={`p-2.5 rounded-xl border text-left text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
+                      isSelected
+                        ? 'bg-sky-50 border-sky-500 text-sky-900 ring-1 ring-sky-400'
+                        : 'bg-slate-50/80 border-slate-200/80 text-slate-700 hover:border-slate-300'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span>{t.icon}</span>
+                      <span className="text-[11px]">{t.label}</span>
+                    </div>
+                    {isSelected && <Check className="w-3.5 h-3.5 text-sky-600 stroke-[3]" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Section 7: 기대하는 것 (태그 칩 클라우드) */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div className="w-5 h-5 rounded-lg bg-pink-100 text-pink-700 flex items-center justify-center">
+                  <Heart className="w-3.5 h-3.5" />
+                </div>
+                <span>기대하는 점</span>
+                <span className="text-rose-500">*</span>
+              </div>
+              <span className="text-[11px] text-slate-400 font-medium">복수 선택</span>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-1">
+              {expectationsList.map((exp) => {
+                const isChecked = data.expectations.includes(exp.label);
+                return (
+                  <button
+                    key={exp.label}
+                    type="button"
+                    onClick={() => handleToggleExpectation(exp.label)}
+                    className={`py-2 px-3 rounded-full text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer ${
+                      isChecked
+                        ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs'
+                        : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700'
+                    }`}
+                  >
+                    <span>{exp.emoji}</span>
+                    <span>{exp.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Section 8: 한마디 */}
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-3">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-800 border-b border-slate-100 pb-2.5">
+              <div className="w-5 h-5 rounded-lg bg-violet-100 text-violet-700 flex items-center justify-center">
+                <MessageSquare className="w-3.5 h-3.5" />
+              </div>
+              <span>남기고 싶은 한마디</span>
+              <span className="text-rose-500">*</span>
+            </div>
+
+            <textarea
+              rows={3}
+              value={data.introduction}
+              onChange={(e) => onChange('introduction', e.target.value)}
+              placeholder="가벼운 각오나 한마디를 적어주세요 :)"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 focus:bg-white transition leading-relaxed"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={onSubmit}
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#0284c7] via-[#0369a1] to-[#081d47] hover:from-[#0369a1] hover:to-[#041434] text-white font-bold text-sm shadow-lg shadow-sky-600/20 transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{isSubmitting ? '지원서 제출 중...' : '지원서 제출하기 ✨'}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -3,13 +3,24 @@ import { type FormData, INITIAL_DATA } from './types';
 import { HomeScreen } from './components/HomeScreen';
 import { ApplyScreen } from './components/ApplyScreen';
 import { PhotosScreen } from './components/PhotosScreen';
+import { AdminScreen } from './components/AdminScreen';
 import { SubmissionSuccessModal } from './components/SubmissionSuccessModal';
 import { submitApplication } from './firebase';
 
 const STORAGE_KEY = 'NETWORK_FORM_DRAFT_V2';
 
+type ViewMode = 'home' | 'apply' | 'photos' | 'admin';
+
 export function App() {
-  const [view, setView] = useState<'home' | 'apply' | 'photos'>('home');
+  const [view, setView] = useState<ViewMode>(() => {
+    if (typeof window !== 'undefined') {
+      if (window.location.hash === '#admin' || window.location.search.includes('admin')) {
+        return 'admin';
+      }
+    }
+    return 'home';
+  });
+
   const [formData, setFormData] = useState<FormData>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -23,6 +34,21 @@ export function App() {
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Sync hash routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#admin') {
+        setView('admin');
+      } else if (window.location.hash === '#apply') {
+        setView('apply');
+      } else if (window.location.hash === '#photos') {
+        setView('photos');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Auto save
   useEffect(() => {
@@ -120,6 +146,7 @@ export function App() {
     setFormData(INITIAL_DATA);
     setIsSubmitted(false);
     setView('home');
+    window.location.hash = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -130,10 +157,17 @@ export function App() {
         <HomeScreen
           onGoToApply={() => {
             setView('apply');
+            window.location.hash = 'apply';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onGoToPhotos={() => {
             setView('photos');
+            window.location.hash = 'photos';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onGoToAdmin={() => {
+            setView('admin');
+            window.location.hash = 'admin';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
@@ -147,6 +181,7 @@ export function App() {
           onSubmit={handleSubmit}
           onBackToHome={() => {
             setView('home');
+            window.location.hash = '';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           isSubmitting={isSubmitting}
@@ -159,10 +194,23 @@ export function App() {
         <PhotosScreen
           onBackToHome={() => {
             setView('home');
+            window.location.hash = '';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onGoToApply={() => {
             setView('apply');
+            window.location.hash = 'apply';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
+
+      {/* View 4: Admin Screen */}
+      {view === 'admin' && (
+        <AdminScreen
+          onBackToHome={() => {
+            setView('home');
+            window.location.hash = '';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
@@ -180,3 +228,4 @@ export function App() {
 }
 
 export default App;
+
