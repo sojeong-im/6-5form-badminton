@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { Sparkles, ArrowRight, Camera, Users } from 'lucide-react';
+import posterImg from '../assets/poster.jpg';
 
 interface HomeScreenProps {
   onGoToApply: () => void;
@@ -20,11 +21,12 @@ export const HomeScreen: FC<HomeScreenProps> = ({ onGoToApply, onGoToPhotos, onG
         {/* Poster Card with subtle styling */}
         <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl shadow-sky-900/10 border-4 border-white bg-white group">
           <img
-            src="/poster.jpg"
+            src={posterImg}
             alt="네트워크 동아리 포스터"
             className="w-full h-auto object-cover block transition-transform duration-500 group-hover:scale-[1.01]"
           />
         </div>
+
 
         {/* Poster Key Visual Badges */}
         <div className="w-full grid grid-cols-3 gap-2 mt-4">
