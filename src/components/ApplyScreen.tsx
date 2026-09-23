@@ -550,17 +550,35 @@ export const ApplyScreen: FC<ApplyScreenProps> = ({
             />
           </div>
 
+          {/* Bottom Validation Error Alert */}
+          {validationError && (
+            <div className="p-4 bg-rose-50 border-2 border-rose-300 rounded-2xl text-rose-700 text-xs font-bold flex items-center gap-2.5 shadow-sm animate-bounce">
+              <span className="w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-extrabold shrink-0">
+                !
+              </span>
+              <span>{validationError}</span>
+            </div>
+          )}
+
           {/* Submit Button */}
           <div className="pt-2">
             <button
               type="button"
               onClick={onSubmit}
               disabled={isSubmitting}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#0284c7] via-[#0369a1] to-[#081d47] hover:from-[#0369a1] hover:to-[#041434] text-white font-bold text-sm shadow-lg shadow-sky-600/20 transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#0284c7] via-[#0369a1] to-[#081d47] hover:from-[#0369a1] hover:to-[#041434] active:scale-[0.98] text-white font-bold text-sm shadow-lg shadow-sky-600/20 transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
             >
-              <span>{isSubmitting ? '지원서 제출 중...' : '지원서 제출하기 ✨'}</span>
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>지원서 저장 중...</span>
+                </>
+              ) : (
+                <span>지원서 제출하기 ✨</span>
+              )}
             </button>
           </div>
+
         </div>
       </div>
     </div>

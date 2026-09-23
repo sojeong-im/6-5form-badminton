@@ -65,56 +65,71 @@ export function App() {
   };
 
   const validateForm = (): boolean => {
+    const rawPhone = (formData.phone || '').replace(/[^0-9]/g, '');
+
     if (!formData.name.trim()) {
-      setValidationError('1. 이름을 입력해주세요.');
+      setValidationError('이름을 입력해 주세요.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return false;
     }
     if (!formData.gender) {
-      setValidationError('1. 성별을 선택해주세요.');
+      setValidationError('성별(남/여)을 선택해 주세요.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return false;
     }
     if (!formData.age.trim()) {
-      setValidationError('1. 나이를 입력해주세요.');
+      setValidationError('나이를 입력해 주세요.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return false;
     }
     if (!formData.university.trim()) {
-      setValidationError('2. 학교명을 입력해주세요.');
+      setValidationError('학교명을 입력해 주세요.');
+      window.scrollTo({ top: 120, behavior: 'smooth' });
       return false;
     }
     if (!formData.major.trim()) {
-      setValidationError('2. 전공을 입력해주세요.');
+      setValidationError('전공/학과를 입력해 주세요.');
+      window.scrollTo({ top: 120, behavior: 'smooth' });
       return false;
     }
     if (!formData.residence.trim()) {
-      setValidationError('3. 거주 지역을 입력해주세요.');
+      setValidationError('거주 지역을 입력해 주세요.');
+      window.scrollTo({ top: 220, behavior: 'smooth' });
       return false;
     }
-    if (!formData.phone.trim() || formData.phone.length < 11) {
-      setValidationError('4. 올바른 연락처(전화번호)를 입력해주세요.');
+    if (!rawPhone || rawPhone.length < 10) {
+      setValidationError('연락처(전화번호 10~11자리)를 올바르게 입력해 주세요.');
+      window.scrollTo({ top: 220, behavior: 'smooth' });
       return false;
     }
     if (formData.sports.length === 0) {
-      setValidationError('5. 관심 있는 종목을 최소 1개 이상 선택해주세요.');
+      setValidationError('희망 종목을 최소 1개 이상 선택해 주세요.');
+      window.scrollTo({ top: 350, behavior: 'smooth' });
       return false;
     }
     if (!formData.exerciseFrequency) {
-      setValidationError('6. 평소 운동 빈도를 선택해주세요.');
+      setValidationError('평소 운동 빈도를 선택해 주세요.');
+      window.scrollTo({ top: 480, behavior: 'smooth' });
       return false;
     }
     if (formData.availableDays.length === 0) {
-      setValidationError('8. 참여 가능한 요일을 최소 1개 이상 선택해주세요.');
+      setValidationError('참여 가능한 요일을 최소 1개 이상 선택해 주세요.');
+      window.scrollTo({ top: 600, behavior: 'smooth' });
       return false;
     }
     if (formData.availableTimes.length === 0) {
-      setValidationError('8. 참여 가능한 시간대를 최소 1개 이상 선택해주세요.');
+      setValidationError('참여 가능한 시간대를 최소 1개 이상 선택해 주세요.');
+      window.scrollTo({ top: 650, behavior: 'smooth' });
       return false;
     }
     if (formData.expectations.length === 0) {
-      setValidationError('9. 기대하는 것을 최소 1개 이상 선택해주세요.');
+      setValidationError('기대하는 점을 최소 1개 이상 선택해 주세요.');
+      window.scrollTo({ top: 750, behavior: 'smooth' });
       return false;
     }
-    if (!formData.introduction.trim() || formData.introduction.trim().length < 5) {
-      setValidationError('10. 본인 소개를 간단히 적어주세요.');
+    if (!formData.introduction.trim()) {
+      setValidationError('간단한 소개나 한마디를 적어주세요.');
+      window.scrollTo({ top: 850, behavior: 'smooth' });
       return false;
     }
 
@@ -126,21 +141,34 @@ export function App() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setValidationError(null);
+
+    // Timeout protection (10 seconds)
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('네트워크 응답 시간이 초과되었습니다.')), 10000)
+    );
+
     try {
-      await submitApplication(formData);
+      await Promise.race([submitApplication(formData), timeoutPromise]);
       setIsSubmitted(true);
       try {
         localStorage.removeItem(STORAGE_KEY);
       } catch (e) {
         console.error(e);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('제출 중 오류:', error);
-      alert('제출 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      const errMsg =
+        error?.code === 'permission-denied'
+          ? '파이어베이스 데이터베이스 권한 오류가 발생했습니다. (Firestore 보안 규칙을 확인해주세요)'
+          : error?.message || '제출 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+      setValidationError(errMsg);
+      alert(errMsg);
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   const handleReset = () => {
     setFormData(INITIAL_DATA);
